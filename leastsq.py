@@ -51,7 +51,7 @@ def error(p, x, y):
 
     return func(p, x) - y
 
-def text_leastsq(k,b,x,y):##测试的，训练集拟合非常好，测试集很差
+def text_leastsq(k,b,x,y):##测试的，
     y_test=[]
     #print(x[0])
     y_test=k*x
@@ -65,7 +65,14 @@ def text_leastsq(k,b,x,y):##测试的，训练集拟合非常好，测试集很�
     print("nnn",nnn)
 
     draw_tp_line(y[:60],nnn)
+     #涨跌准确率
+    kk=0
+    for j in range(0, 19):
+        if (float(y[j + 1]) - float(y[j])) * (float(nnn[j+1]) - float(y[j])) > 0:
 
+            kk = kk + 1
+
+    print("准确率",float(kk/20))
 if __name__ == '__main__':
     for i in range(71):  # 定义自变量x0=[],x1=[]...
         cmd = "x%s = []" % i
@@ -108,6 +115,7 @@ if __name__ == '__main__':
     # 读取结果
     K=Para[0][:60]
     b=Para[0][60]
+    print("cost：" + str(Para[1]))
 
     text_leastsq(K, b, X, Y)
     #print("cost：" + str(Para[1]))
